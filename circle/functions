@@ -527,6 +527,10 @@ update_chart_in_repo() {
       install_hub || exit 1
 
       info "Creating pull request with '$REPO_TO_UPDATE' repo..."
+      info "Showing git credentials"
+      cat ~/.git-credentials
+      info "Showing git credentials - done"
+
       if ! env HUB_VERBOSE=1 hub pull-request -m "[$CHART_PATH] Release $CHART_VERSION_NEXT"; then
         error "Could not create pull request"
         exit 1
