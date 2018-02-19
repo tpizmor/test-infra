@@ -14,9 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-info "Executing release script...."
 CIRCLE_CI_FUNCTIONS_URL=${CIRCLE_CI_FUNCTIONS_URL:-https://raw.githubusercontent.com/tpizmor/test-infra/chart-test/circle/functions}
 source <(curl -sSL $CIRCLE_CI_FUNCTIONS_URL)
+
+info "Executing release script...."
 
 # RELEASE_SERIES_LIST will be an array of comma separated release series
 if [[ -n $RELEASE_SERIES_LIST && -z $LATEST_STABLE ]]; then
@@ -109,8 +110,8 @@ if [[ -n $CHART_REPO && -n $CHART_NAME && -n $DOCKER_PROJECT && -n $DOCKER_PASS 
   if [[ -n $LATEST_STABLE && "$IMAGE_TAG" == "$LATEST_STABLE"* ]] || [[ -z $LATEST_STABLE ]]; then
     # Update main chart repository
     info "Going to update main chart repo"
-    update_chart_in_repo $CHART_REPO
-    info "Main chart repo updated"
+    # update_chart_in_repo $CHART_REPO
+    info "Main chart repo updated - skipped"
 
     # Also update extra chart repository if exists
     if [[ -n $EXTRA_CHART_REPOS_LIST ]]; then
